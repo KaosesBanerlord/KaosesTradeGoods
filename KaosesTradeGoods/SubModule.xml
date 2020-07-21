@@ -1,0 +1,25 @@
+﻿<Module>
+  <Name value="Kaoses Trade Goods"/>
+  <Id value="KaosesTradeGoods"/>
+  <Version value="v0.0.6"/>
+  <SingleplayerModule value="true"/>
+  <MultiplayerModule value="false"/>
+  <DependedModules>
+    <DependedModule Id="Native"/>
+    <DependedModule Id="SandBoxCore"/>
+    <DependedModule Id="Sandbox"/>
+    <DependedModule Id="StoryMode" />
+  </DependedModules>
+  <SubModules>
+    <SubModule>
+      <Name value="KaosesTradeGoods"/>
+      <DLLName value="KaosesTradeGoods.dll"/>
+      <SubModuleClassType value="KaosesTradeGoods.KaosesTradeGoodsSubModule"/>
+      <Tags>
+        <Tag key="DedicatedServerType" value="none" />
+        <Tag key="IsNoRenderModeElement" value="false" />
+      </Tags>
+    </SubModule>
+  </SubModules>
+  <Xmls/>
+</Module>
