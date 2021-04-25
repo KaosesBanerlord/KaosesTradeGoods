@@ -1,49 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using KaosesTradeGoods.Config;
-using TaleWorlds.Core;
+﻿using TaleWorlds.Core;
 using TaleWorlds.Library;
+
 
 namespace KaosesTradeGoods.Utils
 {
-
     public static class Ux
     {
+        public static bool logToFile = false;
+        public static bool Debug = false;
+
         /**
          * colour codes https://cssgenerator.org/rgba-and-hex-color-generator.html
          * colour codes https://quantdev.ssri.psu.edu/sites/qdev/files/Tutorial_ColorR.html
+         * 
+         * Ux.ShowMessage("CustomSpawns " + version + " is now enabled. Enjoy! :)", Color.ConvertStringToColor("#001FFFFF"));
          */
-        public static void ShowMessage(string message, Color messageColor, bool printToLog = false)
+        private static void ShowMessage(string message, Color messageColor, bool logToFile = false)
         {
             InformationManager.DisplayMessage(new InformationMessage(message, messageColor));
-            if (printToLog)
+            if (logToFile)
             {
-                Logging logger = new Logging(KaosesTradeGoodsSubModule.logPath);
-                logger.logString(message);
+                logMessage(message);
             }
         }
 
-        public static void ShowMessageInfo(string message)
+        private static void logMessage(string message)
         {
-            Ux.ShowMessage(message, Color.ConvertStringToColor("#42FF00FF"), Settings.Instance.bLogToFile);
+            Logging.Lm(message);
         }
 
-        public static void ShowMessageDebug(string message)
+        public static void MessageInfo(string message)
         {
-            if (Settings.Instance.bIsDebug)
+            Ux.ShowMessage(message, Color.ConvertStringToColor("#42FF00FF"), logToFile);
+        }
+
+        public static void MessageDebug(string message)
+        {
+            if (Debug)
             {
-                Ux.ShowMessage(message, Color.ConvertStringToColor("#E6FF00FF"));
+                Ux.ShowMessage(message, Color.ConvertStringToColor("#E6FF00FF"), true);
             }
-            Logging.lm(message);
         }
-
-        public static void ShowMessageError(string message)
+        public static void MessageError(string message)
         {
-            Ux.ShowMessage(message, Color.ConvertStringToColor("#FF000000"), true);
-            Logging.lm(message);
+            Ux.ShowMessage(message, Color.ConvertStringToColor("#FF000000"));
+            logMessage(message);
         }
 
     }

@@ -1,18 +1,11 @@
-﻿using KaosesTradeGoods.Config;
-using KaosesTradeGoods.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using KaosesTradeGoods.Utils;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using static TaleWorlds.Core.ItemObject;
 
-namespace KaosesTradeGoods.Objects
+namespace KaosesTradeGoods.Items
 {
-
-    public static class Goods
+    public static class TradeGoods
     {
         public static void processAnimalGoodsWeight(MBReadOnlyList<ItemObject> ItemsList)
         {
@@ -21,7 +14,8 @@ namespace KaosesTradeGoods.Objects
                 var item = ItemsList[i];
                 if (item.ItemType == ItemTypeEnum.Animal)
                 {
-                    float multipleValue = item.Weight * Settings.Instance.weightAnimalMultiplier;
+                    float multipleValue = item.Weight * Statics._settings.weightAnimalMultiplier;
+                    DebugWeight(item, multipleValue, Statics._settings.weightAnimalMultiplier);
                     typeof(ItemObject).GetProperty("Weight").SetValue(item, multipleValue);
                 }
             }
@@ -34,8 +28,9 @@ namespace KaosesTradeGoods.Objects
                 var item = ItemsList[i];
                 if (item.ItemType == ItemTypeEnum.Animal)
                 {
-                    float multipleValue = item.Value * Settings.Instance.valueAnimalMultiplier;
+                    float multipleValue = item.Value * Statics._settings.valueAnimalMultiplier;
                     int newValue = (int)multipleValue;
+                    DebugValue(item, multipleValue, Statics._settings.valueAnimalMultiplier);
                     typeof(ItemObject).GetProperty("Value").SetValue(item, newValue);
                 }
             }
@@ -48,7 +43,8 @@ namespace KaosesTradeGoods.Objects
                 var item = ItemsList[i];
                 if (item.IsFood)
                 {
-                    float multipleValue = item.Weight * Settings.Instance.weightFoodMultiplier;
+                    float multipleValue = item.Weight * Statics._settings.weightFoodMultiplier;
+                    DebugWeight(item, multipleValue, Statics._settings.weightFoodMultiplier);
                     typeof(ItemObject).GetProperty("Weight").SetValue(item, multipleValue);
                 }
             }
@@ -61,8 +57,9 @@ namespace KaosesTradeGoods.Objects
                 var item = ItemsList[i];
                 if (item.IsFood)
                 {
-                    float multipleValue = item.Value * Settings.Instance.valueFoodMultiplier;
+                    float multipleValue = item.Value * Statics._settings.valueFoodMultiplier;
                     int newValue = (int)multipleValue;
+                    DebugValue(item, multipleValue, Statics._settings.valueFoodMultiplier);
                     typeof(ItemObject).GetProperty("Value").SetValue(item, newValue);
                 }
             }
@@ -81,20 +78,22 @@ namespace KaosesTradeGoods.Objects
                         TradeItemComponent tc = item.FoodComponent;
                         if (tc.MoraleBonus == 0)
                         {
-                            multiplier = Settings.Instance.weightFoodByMoral0Multiplier;
-                        }else if (tc.MoraleBonus == 1)
+                            multiplier = Statics._settings.weightFoodByMoral0Multiplier;
+                        }
+                        else if (tc.MoraleBonus == 1)
                         {
-                            multiplier = Settings.Instance.weightFoodByMoral1Multiplier;
+                            multiplier = Statics._settings.weightFoodByMoral1Multiplier;
                         }
                         else if (tc.MoraleBonus == 2)
                         {
-                            multiplier = Settings.Instance.weightFoodByMoral2Multiplier;
+                            multiplier = Statics._settings.weightFoodByMoral2Multiplier;
                         }
                         else if (tc.MoraleBonus == 3)
                         {
-                            multiplier = Settings.Instance.weightFoodByMoral3Multiplier;
+                            multiplier = Statics._settings.weightFoodByMoral3Multiplier;
                         }
                         float multipleValue = item.Weight * multiplier;
+                        DebugWeight(item, multipleValue, multiplier);
                         typeof(ItemObject).GetProperty("Weight").SetValue(item, multipleValue);
                     }
                 }
@@ -114,21 +113,23 @@ namespace KaosesTradeGoods.Objects
                         TradeItemComponent tc = item.FoodComponent;
                         if (tc.MoraleBonus == 0)
                         {
-                            multiplier = Settings.Instance.valueFoodByMoral0Multiplier;
-                        }else if (tc.MoraleBonus == 1)
+                            multiplier = Statics._settings.valueFoodByMoral0Multiplier;
+                        }
+                        else if (tc.MoraleBonus == 1)
                         {
-                            multiplier = Settings.Instance.valueFoodByMoral1Multiplier;
+                            multiplier = Statics._settings.valueFoodByMoral1Multiplier;
                         }
                         else if (tc.MoraleBonus == 2)
                         {
-                            multiplier = Settings.Instance.valueFoodByMoral2Multiplier;
+                            multiplier = Statics._settings.valueFoodByMoral2Multiplier;
                         }
                         else if (tc.MoraleBonus == 3)
                         {
-                            multiplier = Settings.Instance.valueFoodByMoral3Multiplier;
+                            multiplier = Statics._settings.valueFoodByMoral3Multiplier;
                         }
                         float multipleValue = item.Value * multiplier;
                         int newValue = (int)multipleValue;
+                        DebugValue(item, multipleValue, multiplier);
                         typeof(ItemObject).GetProperty("Value").SetValue(item, newValue);
 
                     }
@@ -143,7 +144,8 @@ namespace KaosesTradeGoods.Objects
                 var item = ItemsList[i];
                 if (!item.IsFood && item.ItemType != ItemTypeEnum.Animal && item.IsTradeGood)
                 {
-                    float multipleValue = item.Weight * Settings.Instance.weightGoodssMultiplier;
+                    float multipleValue = item.Weight * Statics._settings.weightGoodsMultiplier;
+                    DebugWeight(item, multipleValue, Statics._settings.weightGoodsMultiplier);
                     typeof(ItemObject).GetProperty("Weight").SetValue(item, multipleValue);
                 }
             }
@@ -156,20 +158,44 @@ namespace KaosesTradeGoods.Objects
                 var item = ItemsList[i];
                 if (!item.IsFood && item.ItemType != ItemTypeEnum.Animal && item.IsTradeGood)
                 {
-                    float multipleValue = item.Value * Settings.Instance.valueGoodsMultiplier;
-                    int newValue = (int)multipleValue;
+                    float multipleValue = 0.0f;
+                    float multiplier = 1.0f;
+                    int newValue = 0;
+                    multiplier = Statics._settings.valueGoodsMultiplier;
+                    multipleValue = item.Value * multiplier;
+                    newValue = (int)multipleValue;
+                    DebugValue(item, multipleValue, Statics._settings.valueGoodsMultiplier);
+
                     typeof(ItemObject).GetProperty("Value").SetValue(item, newValue);
+
+
                 }
             }
         }
 
 
-
-
-
+        private static void DebugValue(ItemObject item, float newValue, float multiplier)
+        {
+            if (Statics._settings.Debug)
+            {
+                Ux.MessageDebug(item.Name.ToString() + " Old Value: " + item.Value.ToString() + "  New Value: " + newValue.ToString() + " using multiplier: "+ multiplier);
+            }
+            else if (Statics._settings.LogToFile)
+            {
+                Logging.Lm(item.Name.ToString() + " Old Value: " + item.Value.ToString() + "  New Value: " + newValue.ToString() + " using multiplier: " + multiplier);
+            }
+        }
+        private static void DebugWeight(ItemObject item, float newValue, float multiplier)
+        {
+            if (Statics._settings.Debug)
+            {
+                Ux.MessageDebug(item.Name.ToString() + " Old Weight: " + item.Weight.ToString() + "  New Weight: " + newValue.ToString() + " using multiplier: " + multiplier);
+            }
+            else if (Statics._settings.LogToFile)
+            {
+                Logging.Lm(item.Name.ToString() + " Old Weight: " + item.Weight.ToString() + "  New Weight: " + newValue.ToString() + " using multiplier: " + multiplier);
+            }
+        }
 
     }
-
-
-
 }

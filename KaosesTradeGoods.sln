@@ -1,25 +1,30 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.29806.167
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KaosesTradeGoods", "KaosesTradeGoods\KaosesTradeGoods.csproj", "{7BEF99CE-4F02-4134-BE5D-FDE8D022744B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KaosesTradeGoods", "KaosesTradeGoods\KaosesTradeGoods.csproj", "{6982452E-6D6F-4899-BFFB-66AEEF8569B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9A551801-CBA7-40E0-B184-1EC657856AF9}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7BEF99CE-4F02-4134-BE5D-FDE8D022744B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7BEF99CE-4F02-4134-BE5D-FDE8D022744B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7BEF99CE-4F02-4134-BE5D-FDE8D022744B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7BEF99CE-4F02-4134-BE5D-FDE8D022744B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6982452E-6D6F-4899-BFFB-66AEEF8569B0}.Debug|x64.ActiveCfg = Debug|x64
+		{6982452E-6D6F-4899-BFFB-66AEEF8569B0}.Debug|x64.Build.0 = Debug|x64
+		{6982452E-6D6F-4899-BFFB-66AEEF8569B0}.Release|x64.ActiveCfg = Release|x64
+		{6982452E-6D6F-4899-BFFB-66AEEF8569B0}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {CC72C704-8AB2-436A-912C-387C63AC969F}
+		SolutionGuid = {3A76FB90-3F16-4B69-9850-CEF3387653AD}
 	EndGlobalSection
 EndGlobal
