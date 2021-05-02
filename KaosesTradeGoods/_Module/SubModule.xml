@@ -1,17 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Module>
-  <Name value="$modulename$" />
+  <Name value="Kaoses TradeGoods" />
   <Id value="$modulename$" />
   <Version value="v$version$" />
   <Official value="false" />
   <DefaultModule value="false" />
   <SingleplayerModule value="true" />
   <MultiplayerModule value="false" />
-  <Url value="https://www.nexusmods.com/mountandblade2bannerlord/mods/" />
+  <Url value="https://www.nexusmods.com/mountandblade2bannerlord/mods/1335" />
   <DependedModules>
-    <DependedModule Id="Bannerlord.Harmony" />
-    <DependedModule Id="Bannerlord.ButterLib" />
-    <DependedModule Id="Bannerlord.MBOptionScreen" />
     <DependedModule Id="Native" />
     <DependedModule Id="SandBoxCore" />
     <DependedModule Id="Sandbox" />
@@ -21,6 +18,7 @@
   <DependedModuleMetadatas>
 	<DependedModuleMetadata id="Bannerlord.MBOptionScreen" order="LoadBeforeThis" version="v$mcmversion$" optional="true" />
 	<DependedModuleMetadata id="Bannerlord.MBOptionScreen.MCMv4" order="LoadBeforeThis" version="v$mcmversion$" optional="true" />
+  <DependedModuleMetadata id="Bannerlord.Harmony" order="LoadBeforeThis" version="v$mcmversion$" optional="true" />
 	<DependedModuleMetadata id="Native" order="LoadBeforeThis" version="e$gameversion$.*"/>
 	<DependedModuleMetadata id="SandBoxCore" order="LoadBeforeThis" version="e$gameversion$.*"/>
 	<DependedModuleMetadata id="Sandbox" order="LoadBeforeThis" version="e$gameversion$.*"/>
@@ -32,6 +30,18 @@
       <Name value="$modulename$" />
       <DLLName value="$modulename$.dll" />
       <SubModuleClassType value="$modulename$.SubModule" />
+      <Tags />
+    </SubModule>
+    <SubModule>
+      <Name value="MCMv4" />
+      <DLLName value="MCMv4.dll" />
+      <SubModuleClassType value="MCM.MCMSubModule" />
+      <Tags />
+    </SubModule>
+    <SubModule>
+      <Name value="MCMv4 Basic Implementation" />
+      <DLLName value="MCMv4.dll" />
+      <SubModuleClassType value="MCM.Implementation.MCMImplementationSubModule" />
       <Tags />
     </SubModule>
   </SubModules>

@@ -27,11 +27,11 @@ namespace KaosesTradeGoods.Settings
         public override string FolderName => Statics.ModuleFolder;
         public override string FormatType => Statics.FormatType;
 
-        [SettingPropertyBool("{=debug}Debug", RequireRestart = false, HintText = "{=debug_desc}Displays mod developer debug information and logs them to the file")]
-        public bool Debug { get; set; } = true;
+        //[SettingPropertyBool("{=debug}Debug", RequireRestart = false, HintText = "{=debug_desc}Displays mod developer debug information and logs them to the file")]
+        public bool Debug { get; set; } = false;
 
-        [SettingPropertyBool("{=debuglog}Log to file", RequireRestart = false, HintText = "{=debuglog_desc}Log information messages to the log file as well as errors and debug")]
-        public bool LogToFile { get; set; } = true;
+        //[SettingPropertyBool("{=debuglog}Log to file", RequireRestart = false, HintText = "{=debuglog_desc}Log information messages to the log file as well as errors and debug")]
+        public bool LogToFile { get; set; } = false;
 
         public bool LoadMCMConfigFile { get; set; } = false;
         public string ModDisplayName { get { return DisplayName; } }

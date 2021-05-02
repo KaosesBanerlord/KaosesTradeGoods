@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>0.0.6</Version>
+    <Version>0.0.7</Version>
     <TargetFramework>net472</TargetFramework>
     <Platforms>x64</Platforms>
     <LangVersion>9.0</LangVersion>
@@ -9,6 +9,8 @@
     <ModuleName>$(MSBuildProjectName)</ModuleName>
     <GameFolder>E:\SteamLibrary\steamapps\common\Mount &amp; Blade II Bannerlord</GameFolder>
     <Authors>Patrick Scott</Authors>
+    <RepositoryUrl></RepositoryUrl>
+    <Copyright>Patrick Scott</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
