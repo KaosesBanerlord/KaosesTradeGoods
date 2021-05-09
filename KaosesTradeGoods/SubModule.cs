@@ -5,16 +5,38 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
+using KaosesTradeGoods.Common;
+using System;
 
 namespace KaosesTradeGoods
 {
     public class SubModule : MBSubModuleBase
     {
+        public static ISettingsProviderInterface? _settings;
+        //private Harmony _harmony;
+
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
             base.OnBeforeInitialModuleScreenSetAsRoot();
-            ConfigLoader.LoadConfig();
-            Ux.MessageInfo("Loaded: " + Statics._settings.ModDisplayName);
+            try
+            {
+                ConfigLoader.LoadConfig();
+                bool modUsesHarmoney = Statics.UsesHarmony;
+                if (modUsesHarmoney)
+                {
+                    if (Kaoses.IsHarmonyLoaded())
+                    {
+                        IM.DisplayModLoadedMessage();
+                    }
+                    else { IM.DisplayModHarmonyErrorMessage(); }
+                }
+                else { IM.DisplayModLoadedMessage(); }
+            }
+            catch (Exception ex)
+            {
+                //Handle exceptions
+                IM.MessageError("Error loading initial config: " + ex.ToStringFull());
+            }
         }
 
         protected override void OnSubModuleLoad()
@@ -43,6 +65,18 @@ namespace KaosesTradeGoods
             {
                 return;
             }
+
+/*
+            try
+            {
+                var harmony = new Harmony(Statics.HarmonyId);
+                harmony.PatchAll(Assembly.GetExecutingAssembly());
+            }
+            catch (Exception ex)
+            {
+                //Handle exceptions
+                IM.MessageError("Error with harmony patch: " + ex.ToStringFull());
+            }*/
 
             if (gameType != null)
             {
@@ -86,6 +120,19 @@ namespace KaosesTradeGoods
         protected override void OnSubModuleUnloaded()
         {
             base.OnSubModuleUnloaded();
+        }
+        public override void OnGameEnd(Game game)
+        {
+/*
+            try
+            {
+                _harmony?.UnpatchAll(Statics.HarmonyId);
+            }
+            catch (Exception ex)
+            {
+                //Handle exceptions
+                IM.MessageError("Error OnGameEnd harmony un-patch: " + ex.ToStringFull());
+            }*/
         }
     }
 }

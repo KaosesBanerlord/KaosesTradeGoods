@@ -13,12 +13,14 @@ namespace KaosesTradeGoods.Settings
     //public class MCMSettings : AttributeGlobalSettings<MCMSettings>, ISettingsProviderInterface 
     public class MCMSettings : AttributeGlobalSettings<MCMSettings>, ISettingsProviderInterface
     {
+
+        #region ModSettingsStandard
         public override string Id => Statics.InstanceID;
 
         // Build mod display name with name and version form the project properties version
 #pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
         string modName = Statics.DisplayName;
-        public override string DisplayName => TextObjectHelper.Create("{=testModDisplayName}" + modName + " {VERSION}", new Dictionary<string, TextObject>()
+        public override string DisplayName => TextObjectHelper.Create("{=KTGDisplayName}" + modName + " {VERSION}", new Dictionary<string, TextObject>()
         {
             { "VERSION", TextObjectHelper.Create(typeof(MCMSettings).Assembly.GetName().Version?.ToString(3) ?? "")! }
         })!.ToString();
@@ -27,14 +29,18 @@ namespace KaosesTradeGoods.Settings
         public override string FolderName => Statics.ModuleFolder;
         public override string FormatType => Statics.FormatType;
 
-        //[SettingPropertyBool("{=debug}Debug", RequireRestart = false, HintText = "{=debug_desc}Displays mod developer debug information and logs them to the file")]
-        public bool Debug { get; set; } = false;
-
-        //[SettingPropertyBool("{=debuglog}Log to file", RequireRestart = false, HintText = "{=debuglog_desc}Log information messages to the log file as well as errors and debug")]
-        public bool LogToFile { get; set; } = false;
-
         public bool LoadMCMConfigFile { get; set; } = false;
         public string ModDisplayName { get { return DisplayName; } }
+        #endregion
+
+        //[SettingPropertyBool("{=debug}Debug", RequireRestart = false, HintText = "{=}{=debug_desc}Displays mod developer debug information and logs them to the file")]
+        //[SettingPropertyGroup("Debug", GroupOrder = 100)]
+        public bool Debug { get; set; } = Statics.Debug;
+
+        //[SettingPropertyBool("{=debuglog}Log to file", RequireRestart = false, HintText = "{=}{=debuglog_desc}Log information messages to the log file as well as errors and debug")]
+        //[SettingPropertyGroup("Debug", GroupOrder = 100)]
+        public bool LogToFile { get; set; } = Statics.LogToFile;
+
 
 
 

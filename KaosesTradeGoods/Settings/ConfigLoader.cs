@@ -17,10 +17,12 @@ namespace KaosesTradeGoods.Settings
             ChechMCMProvider();
             if (Statics._settings is null)
             {
-                Ux.MessageError("Failed to load any config provider");
+                IM.MessageError("Failed to load any config provider");
             }
-            Ux.logToFile = Statics._settings.LogToFile;
-            Ux.Debug = Statics._settings.Debug;
+            IM.logToFile = Statics.LogToFile;
+            IM.Debug = Statics.Debug;
+            IM.PrePrend = Statics.PrePrend;
+            Logging.PrePrend = Statics.PrePrend;
         }
 
         private static void LoadModConfigFile()
@@ -28,10 +30,10 @@ namespace KaosesTradeGoods.Settings
             Settings.Instance = new Settings();
             if (Settings.Instance is not null)
             {
-                Ux.MessageDebug(logPreppend + "Settings.Instance is not null");
+                IM.MessageDebug(logPreppend + "Settings.Instance is not null");
                 if (File.Exists(Statics.ConfigFilePath))
                 {
-                    Ux.MessageDebug(logPreppend + "Config file exists " + Statics.ConfigFilePath.ToString());
+                    IM.MessageDebug(logPreppend + "Config file exists " + Statics.ConfigFilePath.ToString());
                     Settings config = JsonConvert.DeserializeObject<Settings>(File.ReadAllText(Statics.ConfigFilePath));
                     Settings.Instance = config;
                 }
@@ -52,17 +54,17 @@ namespace KaosesTradeGoods.Settings
                 if (MCMSettings.Instance is not null)
                 {
                     Statics._settings = MCMSettings.Instance;
-                    Ux.MessageDebug(logPreppend + "using MCM");
-                    Ux.MessageDebug(logPreppend + "Not Using config settings");
+                    IM.MessageDebug(logPreppend + "using MCM");
+                    IM.MessageDebug(logPreppend + "Not Using config settings");
                 }
                 else
                 {
-                    Ux.MessageError(logPreppend + "Problem loading MCM config");
+                    IM.MessageError(logPreppend + "Problem loading MCM config");
                 }
             }
             else
             {
-                Ux.MessageDebug(logPreppend + "MCM Module is not loaded");
+                IM.MessageDebug(logPreppend + "MCM Module is not loaded");
             }
         }
 
@@ -80,7 +82,7 @@ namespace KaosesTradeGoods.Settings
             if (modnames.Contains("Bannerlord.MBOptionScreen"))// && !overrideSettings
             {
                 Statics.MCMModuleLoaded = true;
-                Ux.MessageDebug(logPreppend + "MCM Module is loaded");
+                IM.MessageDebug(logPreppend + "MCM Module is loaded");
             }
         }
 
@@ -95,7 +97,7 @@ namespace KaosesTradeGoods.Settings
                 {
                     Statics.MCMConfigFileExists = true;
                     Statics.MCMConfigFile = fileLoc;
-                    Ux.MessageDebug(logPreppend + "MCM Module Config file found");
+                    IM.MessageDebug(logPreppend + "MCM Module Config file found");
                 }
             }
         }
@@ -104,7 +106,7 @@ namespace KaosesTradeGoods.Settings
             if (File.Exists(Statics.ConfigFilePath))
             {
                 Statics.ModConfigFileExists = true;
-                Ux.MessageDebug(logPreppend + "Config File FOUND");
+                IM.MessageDebug(logPreppend + "Config File FOUND");
             }
         }
 
