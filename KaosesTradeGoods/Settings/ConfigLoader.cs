@@ -3,6 +3,8 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Linq;
 using TaleWorlds.Engine;
+using Bannerlord.BUTR.Shared.Helpers;
+
 
 namespace KaosesTradeGoods.Settings
 {
@@ -88,7 +90,7 @@ namespace KaosesTradeGoods.Settings
 
         private static void CheckMcmConfig()
         {
-            string RootFolder = System.IO.Path.Combine(Utilities.GetConfigsPath(), "ModSettings/Global/" + Statics.ModuleFolder);
+            string RootFolder = System.IO.Path.Combine(FSIOHelper.GetConfigPath(), "ModSettings/Global/" + Statics.ModuleFolder);
             if (System.IO.Directory.Exists(RootFolder))
             {
                 Statics.MCMConfigFolder = RootFolder;

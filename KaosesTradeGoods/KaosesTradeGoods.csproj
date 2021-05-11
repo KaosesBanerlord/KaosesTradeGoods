@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>0.0.7</Version>
+    <Version>0.0.8</Version>
     <TargetFramework>net472</TargetFramework>
     <Platforms>x64</Platforms>
     <LangVersion>9.0</LangVersion>
@@ -233,7 +233,7 @@
   </ItemGroup>
 
   <ItemGroup>    
-    <PackageReference Include="Bannerlord.BUTR.Shared" Version="1.6.1.31">
+    <PackageReference Include="Bannerlord.BUTR.Shared" Version="1.6.1.39">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

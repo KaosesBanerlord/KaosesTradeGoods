@@ -21,6 +21,8 @@ a Kaoses mod for bannerlords. This is a quality of life mod to allow the adjusti
   - Made Mod Configuration Menu Optional
 - 0.0.7
     - Fixed missing dll include
+- 0.0.8
+    - updated for 1.5.10
 
 
 
