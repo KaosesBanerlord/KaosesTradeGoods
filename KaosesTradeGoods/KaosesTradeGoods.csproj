@@ -36,7 +36,6 @@
       <HintPath>%(Identity)</HintPath>
       <Private>False</Private>
     </Reference>
-    <None Include="..\.editorconfig" Link=".editorconfig" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
 
