@@ -1,19 +1,20 @@
 ﻿using KaosesTradeGoods.Settings;
-using KaosesTradeGoods.Utils;
 using KaosesTradeGoods.Items;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
-using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
-using KaosesTradeGoods.Common;
 using System;
+using KaosesCommon;
+using KaosesCommon.Utils;
+using HarmonyLib;
+using System.Reflection;
 
 namespace KaosesTradeGoods
 {
     public class SubModule : MBSubModuleBase
     {
-        public static ISettingsProviderInterface? _settings;
-        //private Harmony _harmony;
+        public static MCMSettings? _settings;
+        private Harmony _harmony;
 
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
@@ -27,6 +28,19 @@ namespace KaosesTradeGoods
                     if (Kaoses.IsHarmonyLoaded())
                     {
                         IM.DisplayModLoadedMessage();
+                        try
+                        {
+                            if (_harmony == null)
+                            {
+                                _harmony = new Harmony(Statics.HarmonyId);
+                                _harmony.PatchAll(Assembly.GetExecutingAssembly());
+                            }
+
+                        }
+                        catch (Exception ex)
+                        {
+                            IM.ShowError("Error with harmony patch", "Kaoses Parties error", ex);
+                        }
                     }
                     else { IM.DisplayModHarmonyErrorMessage(); }
                 }
@@ -34,8 +48,7 @@ namespace KaosesTradeGoods
             }
             catch (Exception ex)
             {
-                //Handle exceptions
-                IM.MessageError("Error loading initial config: " + ex.ToStringFull());
+                IM.ShowError("Error loading", "initial Mod Data", ex);
             }
         }
 
@@ -66,49 +79,37 @@ namespace KaosesTradeGoods
                 return;
             }
 
-/*
-            try
-            {
-                var harmony = new Harmony(Statics.HarmonyId);
-                harmony.PatchAll(Assembly.GetExecutingAssembly());
-            }
-            catch (Exception ex)
-            {
-                //Handle exceptions
-                IM.MessageError("Error with harmony patch: " + ex.ToStringFull());
-            }*/
-
             if (gameType != null)
             {
                 if (Statics._settings.bUseTradeGoodsModifiers)
                 {
-                    if (Statics._settings.LogToFile) { Logging.Lm("********* TradeGoodsValue  ******************************************************************");}
+                    if (Statics._settings.LogToFile) { Logger.Lm("********* TradeGoodsValue  ******************************************************************");}
                     TradeGoods.processTradeGoodsValue(gameType.Items);
-                    if (Statics._settings.LogToFile) { Logging.Lm("********* TradeGoodsWeight  *****************************************************************");}
+                    if (Statics._settings.LogToFile) { Logger.Lm("********* TradeGoodsWeight  *****************************************************************");}
                     TradeGoods.processTradeGoodsWeight(gameType.Items);
                 }
 
                 if (Statics._settings.bUseAnimalModifiers)
                 {
-                    if (Statics._settings.LogToFile) { Logging.Lm("********* AnimalGoodsValue  *****************************************************************"); }
+                    if (Statics._settings.LogToFile) { Logger.Lm("********* AnimalGoodsValue  *****************************************************************"); }
                     TradeGoods.processAnimalGoodsValue(gameType.Items);
-                    if (Statics._settings.LogToFile) { Logging.Lm("********* AnimalGoodsWeight  *****************************************************************"); }
+                    if (Statics._settings.LogToFile) { Logger.Lm("********* AnimalGoodsWeight  *****************************************************************"); }
                     TradeGoods.processAnimalGoodsWeight(gameType.Items);
                 }
 
                 if (Statics._settings.bUseFoodMoralModifiers)
                 {
-                    if (Statics._settings.LogToFile) { Logging.Lm("********* Moral FoodGoodsValueValue  *****************************************************************"); }
+                    if (Statics._settings.LogToFile) { Logger.Lm("********* Moral FoodGoodsValueValue  *****************************************************************"); }
                     TradeGoods.processFoodGoodsValueByMoral(gameType.Items);
-                    if (Statics._settings.LogToFile) { Logging.Lm("********* Moral FoodGoodsValueWeight  *****************************************************************"); }
+                    if (Statics._settings.LogToFile) { Logger.Lm("********* Moral FoodGoodsValueWeight  *****************************************************************"); }
                     TradeGoods.processFoodGoodsWeightByMoral(gameType.Items);
                 }
 
                 if (Statics._settings.bUseFoodTypeModifiers)
                 {
-                    if (Statics._settings.LogToFile) { Logging.Lm("********* FoodGoodsValue  *****************************************************************"); }
+                    if (Statics._settings.LogToFile) { Logger.Lm("********* FoodGoodsValue  *****************************************************************"); }
                     TradeGoods.processFoodGoodsValue(gameType.Items);
-                    if (Statics._settings.LogToFile) { Logging.Lm("********* FoodGoodsWeight  *****************************************************************"); }
+                    if (Statics._settings.LogToFile) { Logger.Lm("********* FoodGoodsWeight  *****************************************************************"); }
                     TradeGoods.processFoodGoodsWeight(gameType.Items);
                 }
             }
@@ -123,16 +124,6 @@ namespace KaosesTradeGoods
         }
         public override void OnGameEnd(Game game)
         {
-/*
-            try
-            {
-                _harmony?.UnpatchAll(Statics.HarmonyId);
-            }
-            catch (Exception ex)
-            {
-                //Handle exceptions
-                IM.MessageError("Error OnGameEnd harmony un-patch: " + ex.ToStringFull());
-            }*/
         }
     }
 }

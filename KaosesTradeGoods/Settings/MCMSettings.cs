@@ -11,7 +11,7 @@ namespace KaosesTradeGoods.Settings
 {
     //public class MCMSettings : AttributePerSaveSettings<MCMSettings>, ISettingsProviderInterface
     //public class MCMSettings : AttributeGlobalSettings<MCMSettings>, ISettingsProviderInterface 
-    public class MCMSettings : AttributeGlobalSettings<MCMSettings>, ISettingsProviderInterface
+    public class MCMSettings : AttributeGlobalSettings<MCMSettings>
     {
 
         #region ModSettingsStandard

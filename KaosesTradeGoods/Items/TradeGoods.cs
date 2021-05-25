@@ -1,4 +1,4 @@
-﻿using KaosesTradeGoods.Utils;
+﻿using KaosesCommon.Utils;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using static TaleWorlds.Core.ItemObject;
@@ -182,7 +182,7 @@ namespace KaosesTradeGoods.Items
             }
             else if (Statics._settings.LogToFile)
             {
-                Logging.Lm(item.Name.ToString() + " Old Value: " + item.Value.ToString() + "  New Value: " + newValue.ToString() + " using multiplier: " + multiplier);
+                KaosesCommon.Utils.Logger.Lm(item.Name.ToString() + " Old Value: " + item.Value.ToString() + "  New Value: " + newValue.ToString() + " using multiplier: " + multiplier);
             }
         }
         private static void DebugWeight(ItemObject item, float newValue, float multiplier)
@@ -193,7 +193,7 @@ namespace KaosesTradeGoods.Items
             }
             else if (Statics._settings.LogToFile)
             {
-                Logging.Lm(item.Name.ToString() + " Old Weight: " + item.Weight.ToString() + "  New Weight: " + newValue.ToString() + " using multiplier: " + multiplier);
+                KaosesCommon.Utils.Logger.Lm(item.Name.ToString() + " Old Weight: " + item.Weight.ToString() + "  New Weight: " + newValue.ToString() + " using multiplier: " + multiplier);
             }
         }
 

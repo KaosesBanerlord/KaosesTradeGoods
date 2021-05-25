@@ -1,10 +1,12 @@
+using Bannerlord.BUTR.Shared.Helpers;
 using KaosesTradeGoods.Settings;
+using System.Reflection;
 
 namespace KaosesTradeGoods
 {
     public static class Statics
     {
-        public static ISettingsProviderInterface? _settings;
+        public static MCMSettings? _settings;
         public const string ModuleFolder = "KaosesTradeGoods";
         public const string InstanceID = ModuleFolder;
         public const string DisplayName = "Kaoses Trade Goods";
@@ -13,6 +15,8 @@ namespace KaosesTradeGoods
         public const string ConfigFilePath = @"..\\..\\Modules\\" + ModuleFolder + "\\config.json";
         public static string PrePrend { get; set; } = DisplayName;
         public const string HarmonyId = ModuleFolder + ".harmony";
+        public static string GameVersion = ApplicationVersionHelper.GameVersionStr();
+        public static string ModVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
         public const bool UsesHarmony = false;
 
         #region MCMConfigValues
