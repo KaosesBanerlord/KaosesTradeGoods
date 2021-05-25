@@ -74,4 +74,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\KaosesCommon\KaosesCommon\KaosesCommon.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="_Module\bin\Win64_Shipping_Client\" />
+  </ItemGroup>
 </Project>
