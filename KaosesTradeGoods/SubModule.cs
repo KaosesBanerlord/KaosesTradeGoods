@@ -83,34 +83,35 @@ namespace KaosesTradeGoods
             {
                 if (Statics._settings.bUseTradeGoodsModifiers)
                 {
+                    
                     if (Statics._settings.LogToFile) { Logger.Lm("********* TradeGoodsValue  ******************************************************************");}
-                    TradeGoods.processTradeGoodsValue(gameType.Items);
+                    TradeGoods.processTradeGoodsValue(TaleWorlds.CampaignSystem.Items.All);
                     if (Statics._settings.LogToFile) { Logger.Lm("********* TradeGoodsWeight  *****************************************************************");}
-                    TradeGoods.processTradeGoodsWeight(gameType.Items);
+                    TradeGoods.processTradeGoodsWeight(TaleWorlds.CampaignSystem.Items.All);
                 }
 
                 if (Statics._settings.bUseAnimalModifiers)
                 {
                     if (Statics._settings.LogToFile) { Logger.Lm("********* AnimalGoodsValue  *****************************************************************"); }
-                    TradeGoods.processAnimalGoodsValue(gameType.Items);
+                    TradeGoods.processAnimalGoodsValue(TaleWorlds.CampaignSystem.Items.All);
                     if (Statics._settings.LogToFile) { Logger.Lm("********* AnimalGoodsWeight  *****************************************************************"); }
-                    TradeGoods.processAnimalGoodsWeight(gameType.Items);
+                    TradeGoods.processAnimalGoodsWeight(TaleWorlds.CampaignSystem.Items.All);
                 }
 
                 if (Statics._settings.bUseFoodMoralModifiers)
                 {
                     if (Statics._settings.LogToFile) { Logger.Lm("********* Moral FoodGoodsValueValue  *****************************************************************"); }
-                    TradeGoods.processFoodGoodsValueByMoral(gameType.Items);
+                    TradeGoods.processFoodGoodsValueByMoral(TaleWorlds.CampaignSystem.Items.All);
                     if (Statics._settings.LogToFile) { Logger.Lm("********* Moral FoodGoodsValueWeight  *****************************************************************"); }
-                    TradeGoods.processFoodGoodsWeightByMoral(gameType.Items);
+                    TradeGoods.processFoodGoodsWeightByMoral(TaleWorlds.CampaignSystem.Items.All);
                 }
 
                 if (Statics._settings.bUseFoodTypeModifiers)
                 {
                     if (Statics._settings.LogToFile) { Logger.Lm("********* FoodGoodsValue  *****************************************************************"); }
-                    TradeGoods.processFoodGoodsValue(gameType.Items);
+                    TradeGoods.processFoodGoodsValue(TaleWorlds.CampaignSystem.Items.All);
                     if (Statics._settings.LogToFile) { Logger.Lm("********* FoodGoodsWeight  *****************************************************************"); }
-                    TradeGoods.processFoodGoodsWeight(gameType.Items);
+                    TradeGoods.processFoodGoodsWeight(TaleWorlds.CampaignSystem.Items.All);
                 }
             }
 
