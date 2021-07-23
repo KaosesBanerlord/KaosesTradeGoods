@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>0.0.8</Version>
+    <Version>0.0.9</Version>
     <TargetFramework>net472</TargetFramework>
     <Platforms>x64</Platforms>
     <LangVersion>9.0</LangVersion>
@@ -61,8 +61,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Bannerlord.ButterLib" Version="1.0.22" IncludeAssets="compile" />
-    <PackageReference Include="Bannerlord.UIExtenderEx" Version="2.1.5" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.ButterLib" Version="1.0.24" IncludeAssets="compile" />
+    <PackageReference Include="Bannerlord.UIExtenderEx" Version="2.1.6" IncludeAssets="compile" />
     <PackageReference Include="Bannerlord.MCM" Version="4.3.10" IncludeAssets="compile" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1">
       <PrivateAssets>all</PrivateAssets>
