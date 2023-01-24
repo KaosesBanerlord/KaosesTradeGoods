@@ -1,45 +1,44 @@
-﻿using Bannerlord.BUTR.Shared.Helpers;
-using MCM.Abstractions.Attributes;
+﻿using MCM.Abstractions.Attributes;
 using MCM.Abstractions.Attributes.v2;
-using MCM.Abstractions.Dropdown;
-using MCM.Abstractions.Settings.Base.Global;
-//using MCM.Abstractions.Settings.Base.PerSave;
-using System.Collections.Generic;
+using MCM.Abstractions.Base.Global;
 using TaleWorlds.Localization;
 
 namespace KaosesTradeGoods.Settings
 {
     //public class MCMSettings : AttributePerSaveSettings<MCMSettings>, ISettingsProviderInterface
     //public class MCMSettings : AttributeGlobalSettings<MCMSettings>, ISettingsProviderInterface 
-    public class MCMSettings : AttributeGlobalSettings<MCMSettings>
+    public class Config : AttributeGlobalSettings<Config>
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public Config()
+        {
+            PropertyChanged += MCMSettings_PropertyChanged;
+        }
 
         #region ModSettingsStandard
-        public override string Id => Statics.InstanceID;
-
+        public override string Id => SubModule.ModuleId;
+        public override string FolderName => SubModule.ModuleId;
+        public string ModName => "Kaoses Trade Goods";
+        public override string FormatType => "json";
+        #region Translatable DisplayName 
         // Build mod display name with name and version form the project properties version
-#pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
-        string modName = Statics.DisplayName;
-        public override string DisplayName => TextObjectHelper.Create("{=KTGDisplayName}" + modName + " {VERSION}", new Dictionary<string, TextObject>()
-        {
-            { "VERSION", TextObjectHelper.Create(typeof(MCMSettings).Assembly.GetName().Version?.ToString(3) ?? "")! }
-        })!.ToString();
-#pragma warning restore CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
-
-        public override string FolderName => Statics.ModuleFolder;
-        public override string FormatType => Statics.FormatType;
-
-        public bool LoadMCMConfigFile { get; set; } = false;
+#pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the null ability of reference types.
+        TextObject versionTextObj = new TextObject(typeof(Config).Assembly.GetName().Version?.ToString(3) ?? "");
+        public override string DisplayName => new TextObject("{=KaosesTradeGoodsDisplayName}" + ModName + " " + versionTextObj.ToString())!.ToString();
+#pragma warning restore CS8620 // Argument cannot be used for parameter due to differences in the null ability of reference types.
+        #endregion
         public string ModDisplayName { get { return DisplayName; } }
         #endregion
 
-        //[SettingPropertyBool("{=debug}Debug", RequireRestart = false, HintText = "{=}{=debug_desc}Displays mod developer debug information and logs them to the file")]
-        //[SettingPropertyGroup("Debug", GroupOrder = 100)]
-        public bool Debug { get; set; } = Statics.Debug;
+        [SettingPropertyBool("{=debug}Debug", RequireRestart = false, HintText = "{=}{=debug_desc}Displays mod developer debug information and logs them to the file")]
+        [SettingPropertyGroup("Debug", GroupOrder = 100)]
+        public bool Debug { get; set; } = false;
 
-        //[SettingPropertyBool("{=debuglog}Log to file", RequireRestart = false, HintText = "{=}{=debuglog_desc}Log information messages to the log file as well as errors and debug")]
-        //[SettingPropertyGroup("Debug", GroupOrder = 100)]
-        public bool LogToFile { get; set; } = Statics.LogToFile;
+        [SettingPropertyBool("{=debuglog}Log to file", RequireRestart = false, HintText = "{=}{=debuglog_desc}Log information messages to the log file as well as errors and debug")]
+        [SettingPropertyGroup("Debug", GroupOrder = 100)]
+        public bool LogToFile { get; set; } = false;
 
 
 
@@ -140,6 +139,15 @@ namespace KaosesTradeGoods.Settings
         public float valueFoodByMoral3Multiplier { get; set; } = 2.0f;
 
 
+
+        private void MCMSettings_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Debug))
+            {
+                Debug = false;
+                LogToFile = false;
+            }
+        }
 
 
 

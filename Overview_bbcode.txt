@@ -1,0 +1,41 @@
+[size=6][color=#f1c232][u]Overview[/u][/color][/size]
+This is a quality-of-life  mod to allow the adjusting of trade good weights and values. Food weights can be done by type or by morale value.
+
+[size=5][color=#f1c232]Requirements:[/color][/size]
+The easiest way to get the mod requirements is to use[url=https://next.nexusmods.com/mountandblade2bannerlord/collections/n4byjn] BUTR Stack[/url] collection as a base, and then download [url=https://www.nexusmods.com/mountandblade2bannerlord/mods/4994]Kaoses Common[/url]
+
+[size=5][color=#f1c232]Documentation[/color][/size]
+For detailed information and API docs visit [url=http://bannerlord.kaoses.com/doku.php?id=mods:kaosestradegoods]Kaoses Trade Goods Wiki page[/url].
+
+
+
+[size=5][color=#f1c232]Features:[/color][/size]
+[list]
+[*]Weight
+[*]Price
+[*]Weight by morale
+[*]Price by morale
+[/list]
+
+[size=5][color=#f1c232]Installation:[/color][/size]
+[size=3]It is best to install the mod via vortex if you are not an advanced user[/size]
+Add the mod folder to your modules folder (C:\Program Files (x86)\Steam\steamapps\common\Mount
+& Blade II Bannerlord\Modules) unblock the .dll and then activate it.
+
+[size=5][color=#f1c232]Translations:[/color][/size]
+The mod should be fully translatable, and the strings file can be found in the download section, or in the folder ModuleData inside of the mod folder.
+
+[size=5][color=#f1c232]My Other Mods:[/color][/size]
+[list]
+[*][url=https://www.nexusmods.com/mountandblade2bannerlord/mods/2911]Kaoses tweaks[/url]
+[*][url=https://www.nexusmods.com/mountandblade2bannerlord/mods/4994]Kaoses Common[/url]
+[*][url=https://www.nexusmods.com/mountandblade2bannerlord/mods/684]Kaoses Party sizes[/url]
+[*][url=https://www.nexusmods.com/mountandblade2bannerlord/mods/1333]Kaoses Troop Wages[/url]
+[*][url=https://www.nexusmods.com/mountandblade2bannerlord/mods/1335]Kaoses Trade Goods[/url]
+[*][url=https://www.nexusmods.com/mountandblade2bannerlord/mods/726]Kaoses Projectiles[/url]
+[*][url=https://www.nexusmods.com/mountandblade2bannerlord/mods/2912/]Kaoses Party Speeds[/url]
+[*][url=https://www.nexusmods.com/mountandblade2bannerlord/mods/77]More Bandits[/url]
+[*][url=https://www.nexusmods.com/mountandblade2bannerlord/mods/79]More Projectiles[/url]
+[*][url=https://www.nexusmods.com/mountandblade2bannerlord/mods/335]Expanded Bandits[/url]
+[/list]
+

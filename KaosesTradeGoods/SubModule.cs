@@ -1,54 +1,66 @@
-﻿using KaosesTradeGoods.Settings;
-using KaosesTradeGoods.Items;
+﻿using KaosesTradeGoods.Items;
+using System;
+using HarmonyLib;
+using System.Reflection;
+using KaosesCommon.Utils;
+using KaosesCommon;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;
-using System;
-using KaosesCommon;
-using KaosesCommon.Utils;
-using HarmonyLib;
-using System.Reflection;
+using KaosesTradeGoods.Objects;
 
 namespace KaosesTradeGoods
 {
     public class SubModule : MBSubModuleBase
     {
-        public static MCMSettings? _settings;
-        private Harmony _harmony;
+        public const bool UsesHarmony = true;
+        public const string ModuleId = "KaosesTradeGoods";
+        public const string modulePath = @"..\\..\\Modules\\" + ModuleId + "\\";
+        public const string HarmonyId = ModuleId + ".harmony";
+        private Harmony? _harmony;
 
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
             base.OnBeforeInitialModuleScreenSetAsRoot();
+            new Init();
+            //IM.MessageModInfo();
+            //IM.MessageDebug(ModuleId + " : Mod Logging test");
             try
             {
-                ConfigLoader.LoadConfig();
-                bool modUsesHarmoney = Statics.UsesHarmony;
-                if (modUsesHarmoney)
+                if (UsesHarmony)
                 {
                     if (Kaoses.IsHarmonyLoaded())
                     {
-                        IM.DisplayModLoadedMessage();
+                        IM.MessageModLoaded();
                         try
                         {
                             if (_harmony == null)
                             {
-                                _harmony = new Harmony(Statics.HarmonyId);
+                                Harmony.DEBUG = true;
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                                _harmony = new Harmony(ModuleId);
                                 _harmony.PatchAll(Assembly.GetExecutingAssembly());
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
                             }
 
                         }
                         catch (Exception ex)
                         {
-                            IM.ShowError("Error with harmony patch", "Kaoses Parties error", ex);
+                            IM.ShowError(ex, Factory.Settings.ModName + " Harmony Error:");
                         }
                     }
-                    else { IM.DisplayModHarmonyErrorMessage(); }
+                    else { IM.MessageHarmonyLoadError(); }
                 }
-                else { IM.DisplayModLoadedMessage(); }
+                else
+                {
+#pragma warning disable CS0162 // Unreachable code detected
+                    IM.MessageModLoaded();
+#pragma warning restore CS0162 // Unreachable code detected
+                }
             }
             catch (Exception ex)
             {
-                IM.ShowError("Error loading", "initial Mod Data", ex);
+                IM.ShowError(ex, "initial Loading Error " + Factory.Settings.ModName);
             }
         }
 
@@ -81,36 +93,38 @@ namespace KaosesTradeGoods
 
             if (gameType != null)
             {
-                if (Statics._settings.bUseTradeGoodsModifiers)
+                if (Factory.Settings.bUseTradeGoodsModifiers)
                 {
-                    if (Statics._settings.LogToFile) { Logger.Lm("********* TradeGoodsValue  ******************************************************************");}
-                    TradeGoods.processTradeGoodsValue(gameType.Items);
-                    if (Statics._settings.LogToFile) { Logger.Lm("********* TradeGoodsWeight  *****************************************************************");}
-                    TradeGoods.processTradeGoodsWeight(gameType.Items);
+
+
+                    if (Factory.Settings.LogToFile) { Logger.Lm("********* TradeGoodsValue  ******************************************************************"); }
+                    TradeGoods.ProcessTradeGoodsValue(TaleWorlds.CampaignSystem.Extensions.Items.All);
+                    if (Factory.Settings.LogToFile) { Logger.Lm("********* TradeGoodsWeight  *****************************************************************"); }
+                    TradeGoods.ProcessTradeGoodsWeight(TaleWorlds.CampaignSystem.Extensions.Items.All);
                 }
 
-                if (Statics._settings.bUseAnimalModifiers)
+                if (Factory.Settings.bUseAnimalModifiers)
                 {
-                    if (Statics._settings.LogToFile) { Logger.Lm("********* AnimalGoodsValue  *****************************************************************"); }
-                    TradeGoods.processAnimalGoodsValue(gameType.Items);
-                    if (Statics._settings.LogToFile) { Logger.Lm("********* AnimalGoodsWeight  *****************************************************************"); }
-                    TradeGoods.processAnimalGoodsWeight(gameType.Items);
+                    if (Factory.Settings.LogToFile) { Logger.Lm("********* AnimalGoodsValue  *****************************************************************"); }
+                    TradeGoods.ProcessAnimalGoodsValue(TaleWorlds.CampaignSystem.Extensions.Items.All);
+                    if (Factory.Settings.LogToFile) { Logger.Lm("********* AnimalGoodsWeight  *****************************************************************"); }
+                    TradeGoods.ProcessAnimalGoodsWeight(TaleWorlds.CampaignSystem.Extensions.Items.All);
                 }
 
-                if (Statics._settings.bUseFoodMoralModifiers)
+                if (Factory.Settings.bUseFoodMoralModifiers)
                 {
-                    if (Statics._settings.LogToFile) { Logger.Lm("********* Moral FoodGoodsValueValue  *****************************************************************"); }
-                    TradeGoods.processFoodGoodsValueByMoral(gameType.Items);
-                    if (Statics._settings.LogToFile) { Logger.Lm("********* Moral FoodGoodsValueWeight  *****************************************************************"); }
-                    TradeGoods.processFoodGoodsWeightByMoral(gameType.Items);
+                    if (Factory.Settings.LogToFile) { Logger.Lm("********* Moral FoodGoodsValueValue  *****************************************************************"); }
+                    TradeGoods.ProcessFoodGoodsValueByMoral(TaleWorlds.CampaignSystem.Extensions.Items.All);
+                    if (Factory.Settings.LogToFile) { Logger.Lm("********* Moral FoodGoodsValueWeight  *****************************************************************"); }
+                    TradeGoods.ProcessFoodGoodsWeightByMoral(TaleWorlds.CampaignSystem.Extensions.Items.All);
                 }
 
-                if (Statics._settings.bUseFoodTypeModifiers)
+                if (Factory.Settings.bUseFoodTypeModifiers)
                 {
-                    if (Statics._settings.LogToFile) { Logger.Lm("********* FoodGoodsValue  *****************************************************************"); }
-                    TradeGoods.processFoodGoodsValue(gameType.Items);
-                    if (Statics._settings.LogToFile) { Logger.Lm("********* FoodGoodsWeight  *****************************************************************"); }
-                    TradeGoods.processFoodGoodsWeight(gameType.Items);
+                    if (Factory.Settings.LogToFile) { Logger.Lm("********* FoodGoodsValue  *****************************************************************"); }
+                    TradeGoods.ProcessFoodGoodsValue(TaleWorlds.CampaignSystem.Extensions.Items.All);
+                    if (Factory.Settings.LogToFile) { Logger.Lm("********* FoodGoodsWeight  *****************************************************************"); }
+                    TradeGoods.ProcessFoodGoodsWeight(TaleWorlds.CampaignSystem.Extensions.Items.All);
                 }
             }
 

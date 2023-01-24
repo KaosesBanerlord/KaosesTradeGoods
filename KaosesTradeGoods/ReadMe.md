@@ -23,6 +23,8 @@ a Kaoses mod for bannerlords. This is a quality of life mod to allow the adjusti
     - Fixed missing dll include
 - 0.0.8
     - updated for 1.5.10
+- 0.0.9
+    - updated for 1.6.0
 
 
 
