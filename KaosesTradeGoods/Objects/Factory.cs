@@ -1,16 +1,49 @@
-﻿using KaosesCommon.Utils;
+using KaosesCommon.Objects;
+using KaosesCommon.Utils;
 using KaosesTradeGoods.Settings;
+using KaosesTradeGoodsCore.Settings;
+using System;
 using System.Reflection;
+using CoreConfig = KaosesTradeGoodsCore.Settings.KaosesTradeGoodsCoreConfig;
+using CoreFactory = KaosesTradeGoodsCore.Objects.KaosesTradeGoodsCoreFactory;
 
 namespace KaosesTradeGoods.Objects
 {
-
+    /// <summary>
+    /// KaosesTradeGoods Factory Object
+    /// </summary>
     public static class Factory
     {
+        /// <summary>
+        /// Variable to hold the MCM settings object
+        /// </summary>
         private static Config? _settings = null;
 
+        //private static ConfigOther? _settings2 = null;
+        private static CoreConfig? _settingscore = null;
+
+        private static InfoMgr? _im = null;
+
+        public static InfoMgr IM
+        {
+            get
+            {
+                return _im;
+            }
+            set
+            {
+                _im = value;
+            }
+        }
+
+        /// <summary>
+        /// Bool indicates if MCM is a loaded mod
+        /// </summary>
         public static bool MCMModuleLoaded { get; set; } = false;
 
+        /// <summary>
+        /// MCM Settings Object Instance
+        /// </summary>
         public static Config Settings
         {
             get
@@ -20,7 +53,7 @@ namespace KaosesTradeGoods.Objects
                     _settings = Config.Instance;
                     if (_settings is null)
                     {
-                        IM.ShowMessageBox("Failed to load any config provider", "MCM Error");
+                        Factory.IM.ShowMessageBox("Kaoses Temp Beta Failed to load MCM config provider", "Kaoses Temp Beta MCM Error");
                     }
                 }
                 return _settings;
@@ -30,8 +63,34 @@ namespace KaosesTradeGoods.Objects
                 _settings = value;
             }
         }
+        public static CoreConfig SettingsCore
+        {
+            get
+            {
+                if (_settingscore == null)
+                {
+                    _settingscore = CoreConfig.Instance;
+                    if (_settingscore is null)
+                    {
+                        Factory.IM.ShowMessageBox("KaosesTradeGoods Core Failed to load config provider", "KaosesTradeGoods Core Error");
+                    }
+                }
+                return _settingscore;
+            }
+            set
+            {
+                _settingscore = value;
+            }
+        }
 
+        /// <summary>
+        /// Mod version
+        /// </summary>
+        public static string ModVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
+        /// <summary>
+        /// Unused mod config file path
+        /// </summary>
         private static string ConfigFilePath
         {
 
@@ -42,15 +101,7 @@ namespace KaosesTradeGoods.Objects
             //set {  = value; }
 
         }
-        public static string ModVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-        #region MCMConfigValues
-        //public static string? MCMConfigFolder { get; set; }
-        //public static string? MCMConfigFile { get; set; }
-        //public static bool MCMConfigFileExists { get; set; } = false;
-        //public static bool MCMModuleLoaded { get; set; } = false;
-        //public static bool ModConfigFileExists { get; set; } = false;
-        #endregion
 
     }
 }

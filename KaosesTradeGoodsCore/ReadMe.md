@@ -1,7 +1,7 @@
-# Kaoses Trade Goods
+# 
 
 ## Description
-Kaoses Trade Goods mod for bannerlords. 
+ mod for bannerlords. 
 
 ## ChangeLog
 - 0.0.1 
